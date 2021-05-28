@@ -18,6 +18,7 @@ type Section struct {
 	CourseID int     `json:"-" gorm:"course_id"`
 	Name     string  `json:"name,omitempty" gorm:"name"`
 	Icon     string  `json:"icon,omitempty" gorm:"icon"`
+	Type     string  `json:"type"`
 	Topic    []Topic `json:"topics"`
 }
 
