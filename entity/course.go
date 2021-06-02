@@ -35,7 +35,7 @@ type Topic struct {
 
 type SubTopic struct {
 	ID             int    `json:"id,omitempty"`
-	TopicId        int    `json:"-	"`
+	TopicId        int    `json:"-"`
 	Topic          Topic  `json:"-" gorm:"foreignKey:TopicId"`
 	Text           string `json:"text,omitempty"`
 	TranslatedText string `json:"translated_text,omitempty"`
@@ -52,7 +52,9 @@ func (Section) TableName() string {
 }
 
 func (s *Section) AfterFind(tx *gorm.DB) (err error) {
-	s.Icon = fmt.Sprintf("%v/%v", os.Getenv("MEDIA_URL"), s.Icon)
+	if s.Icon != "" {
+		s.Icon = fmt.Sprintf("%v/%v", os.Getenv("MEDIA_URL"), s.Icon)
+	}
 	return
 }
 
@@ -61,7 +63,9 @@ func (Topic) TableName() string {
 }
 
 func (t *Topic) AfterFind(tx *gorm.DB) (err error) {
-	t.Icon = fmt.Sprintf("%v/%v", os.Getenv("MEDIA_URL"), t.Icon)
+	if t.Icon != "" {
+		t.Icon = fmt.Sprintf("%v/%v", os.Getenv("MEDIA_URL"), t.Icon)
+	}
 	return
 }
 
@@ -70,6 +74,8 @@ func (SubTopic) TableName() string {
 }
 
 func (s *SubTopic) AfterFind(tx *gorm.DB) (err error) {
-	s.Image = fmt.Sprintf("%v/%v", os.Getenv("MEDIA_URL"), s.Image)
+	if s.Image != "" {
+		s.Image = fmt.Sprintf("%v/%v", os.Getenv("MEDIA_URL"), s.Image)
+	}
 	return
 }

@@ -8,6 +8,7 @@ import (
 type CourseService interface {
 	AllCourses() []entity.Course
 	TopicsById(id int) []entity.Topic
+	GetSubtopics(id int) []entity.SubTopic
 }
 
 type courseService struct {
@@ -28,4 +29,9 @@ func (s courseService) AllCourses() []entity.Course {
 func (s courseService) TopicsById(id int) []entity.Topic {
 	topics := s.repository.GetTopics(id)
 	return topics
+}
+
+func (s courseService) GetSubtopics(id int) []entity.SubTopic {
+	subTopics := s.repository.GetSubtopics(id)
+	return subTopics
 }

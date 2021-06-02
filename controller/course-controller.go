@@ -40,10 +40,9 @@ func DetailedTopic(c *gin.Context) {
 	id := c.Param("id")
 	if sectionId, err := strconv.Atoi(id); err == nil {
 		newService := service.NewCourseService()
-		topic := newService.TopicsById(sectionId)
-		c.JSON(http.StatusOK, topic)
+		subTopics := newService.GetSubtopics(sectionId)
+		c.JSON(http.StatusOK, subTopics)
 	} else {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "id must be integer"})
 	}
 }
-
