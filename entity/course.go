@@ -26,21 +26,21 @@ type Topic struct {
 	ID             int        `json:"id,omitempty" gorm:"id"`
 	SectionID      int        `json:"-"`
 	Section        Section    `json:"-" gorm:"foreignKey:SectionID"`
-	Name           string     `json:"name,omitempty"`
-	TranslatedName string     `json:"translated_name,omitempty" gorm:"translated_name"`
-	Icon           string     `json:"icon,omitempty" media:"default"`
-	Type           string     `json:"type,omitempty"`
-	SubTopic       []SubTopic `json:"sub_topics,omitempty"`
+	Name           string     `json:"name,"`
+	TranslatedName string     `json:"translated_name," gorm:"translated_name"`
+	Icon           string     `json:"icon," media:"default"`
+	Type           string     `json:"type,"`
+	SubTopic       []SubTopic `json:"sub_topics,"`
 }
 
 type SubTopic struct {
 	ID             int    `json:"id,omitempty"`
 	TopicId        int    `json:"-"`
 	Topic          Topic  `json:"-" gorm:"foreignKey:TopicId"`
-	Text           string `json:"text,omitempty"`
-	TranslatedText string `json:"translated_text,omitempty"`
-	Audio          string `json:"audio,omitempty"`
-	Image          string `json:"image,omitempty"`
+	Text           string `json:"text,"`
+	TranslatedText string `json:"translated_text,"`
+	Audio          string `json:"audio,"`
+	Image          string `json:"image,"`
 }
 
 func (Course) TableName() string {
@@ -76,6 +76,9 @@ func (SubTopic) TableName() string {
 func (s *SubTopic) AfterFind(tx *gorm.DB) (err error) {
 	if s.Image != "" {
 		s.Image = fmt.Sprintf("%v/%v", os.Getenv("MEDIA_URL"), s.Image)
+	}
+	if s.Audio != "" {
+		s.Audio = fmt.Sprintf("%v/%v", os.Getenv("MEDIA_URL"), s.Audio)
 	}
 	return
 }
