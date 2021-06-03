@@ -22,10 +22,11 @@ RUN upx ./run
 FROM alpine:latest as prod
 RUN apk --no-cache add ca-certificates
 
-#Copy executable from builder
-COPY --from=builder /go/src/app/run /usr/src/app
-
 WORKDIR /usr/src/app
+
+#Copy executable from builder
+COPY --from=builder /go/src/app/run /usr/src/app/run
+
 
 ENV GIN_MODE=release
 
