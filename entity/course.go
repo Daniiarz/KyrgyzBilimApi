@@ -3,6 +3,7 @@ package entity
 import (
 	"fmt"
 	"gorm.io/gorm"
+	"os"
 )
 
 type Course struct {
@@ -52,7 +53,7 @@ func (Section) TableName() string {
 
 func (s *Section) AfterFind(tx *gorm.DB) (err error) {
 	if s.Icon != "" {
-		s.Icon = fmt.Sprintf("%v/%v", "http://159.89.29.83/media", s.Icon)
+		s.Icon = fmt.Sprintf("%v/%v", os.Getenv("MEDIA_URL"), s.Icon)
 	}
 	return
 }
@@ -63,7 +64,7 @@ func (Topic) TableName() string {
 
 func (t *Topic) AfterFind(tx *gorm.DB) (err error) {
 	if t.Icon != "" {
-		t.Icon = fmt.Sprintf("%v/%v", "http://159.89.29.83/media", t.Icon)
+		t.Icon = fmt.Sprintf("%v/%v", os.Getenv("MEDIA_URL"), t.Icon)
 	}
 	return
 }
@@ -74,10 +75,10 @@ func (SubTopic) TableName() string {
 
 func (s *SubTopic) AfterFind(tx *gorm.DB) (err error) {
 	if s.Image != "" {
-		s.Image = fmt.Sprintf("%v/%v", "http://159.89.29.83/media", s.Image)
+		s.Image = fmt.Sprintf("%v/%v", os.Getenv("MEDIA_URL"), s.Image)
 	}
 	if s.Audio != "" {
-		s.Audio = fmt.Sprintf("%v/%v", "http://159.89.29.83/media", s.Audio)
+		s.Audio = fmt.Sprintf("%v/%v", os.Getenv("MEDIA_URL"), s.Audio)
 	}
 	return
 }

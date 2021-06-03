@@ -1,6 +1,6 @@
 FROM golang:1.16-alpine as builder
 
-    WORKDIR /go/src/app
+WORKDIR /go/src/app
 
 ENV GO111MODULE=on
 
