@@ -1,6 +1,6 @@
 FROM golang:1.16-alpine as builder
 
-WORKDIR /go/src/app
+    WORKDIR /go/src/app
 
 ENV GO111MODULE=on
 
@@ -23,7 +23,9 @@ FROM alpine:latest as prod
 RUN apk --no-cache add ca-certificates
 
 #Copy executable from builder
-COPY --from=builder /go/src/app/run .
+COPY --from=builder /go/src/app/run /usr/src/app
+
+WORKDIR /usr/src/app
 
 ENV GIN_MODE=release
 
