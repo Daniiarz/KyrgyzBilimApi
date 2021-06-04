@@ -58,8 +58,3 @@ func GetMediaRoot() string {
 	mediaRoot := "/go/src/app"
 	return fmt.Sprintf("%v/%v/", mediaRoot, "media")
 }
-
-func SetMediaUrl(s string) string {
-	url := fmt.Sprintf("%v/%v", "http://159.89.29.83/media", s)
-	return url
-}

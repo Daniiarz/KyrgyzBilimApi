@@ -2,7 +2,6 @@ package entity
 
 import (
 	"gorm.io/gorm"
-	"kyrgyz-bilim/service"
 )
 
 type Course struct {
@@ -52,7 +51,7 @@ func (Section) TableName() string {
 
 func (s *Section) AfterFind(tx *gorm.DB) (err error) {
 	if s.Icon != "" {
-		s.Icon = service.SetMediaUrl(s.Icon)
+		s.Icon = SetMediaUrl(s.Icon)
 	}
 	return
 }
@@ -63,7 +62,7 @@ func (Topic) TableName() string {
 
 func (t *Topic) AfterFind(tx *gorm.DB) (err error) {
 	if t.Icon != "" {
-		t.Icon = service.SetMediaUrl(t.Icon)
+		t.Icon = SetMediaUrl(t.Icon)
 	}
 	return
 }
@@ -74,10 +73,10 @@ func (SubTopic) TableName() string {
 
 func (s *SubTopic) AfterFind(tx *gorm.DB) (err error) {
 	if s.Image != "" {
-		s.Image = service.SetMediaUrl(s.Image)
+		s.Image = SetMediaUrl(s.Image)
 	}
 	if s.Audio != "" {
-		s.Audio = service.SetMediaUrl(s.Audio)
+		s.Audio = SetMediaUrl(s.Audio)
 	}
 	return
 }

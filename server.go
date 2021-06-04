@@ -19,7 +19,7 @@ type globalRoutes struct {
 }
 
 func main() {
-	err := godotenv.Load("/usr/src/app/.env")
+	err := godotenv.Load(".env")
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
