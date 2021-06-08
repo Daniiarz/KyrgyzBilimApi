@@ -5,18 +5,18 @@ import (
 )
 
 type Course struct {
-	ID          int    `json:"id,omitempty" `
-	Name        string `json:"name,omitempty"`
-	Description string `json:"description,omitempty"`
+	ID          int    `json:"id," `
+	Name        string `json:"name,"`
+	Description string `json:"description,"`
 }
 
 type Section struct {
 	ID       int     `json:"id,omitempty"`
 	Course   Course  `json:"-" gorm:"foreignKey:CourseID"`
 	CourseID int     `json:"-" gorm:"course_id"`
-	Name     string  `json:"name,omitempty" gorm:"name"`
-	Icon     string  `json:"icon,omitempty" gorm:"icon"`
-	Type     string  `json:"type"`
+	Name     string  `json:"name," gorm:"name"`
+	Icon     string  `json:"icon," gorm:"icon"`
+	Type     string  `json:"type,"`
 	Topic    []Topic `json:"topics"`
 }
 
